@@ -1,0 +1,15 @@
+{
+    "name": "bishop-radio",
+    "version": "1.0.2",
+    "description": "Radio submodule for the Bishop Discord bot",
+    "author": "Alex Riley",
+    "license": "GNU GENERAL PUBLIC LICENSE",
+    "dependencies": {
+      "@discord-player/extractor": "^4.4.1",
+      "@discordjs/opus": "^0.9.0",
+      "discord-player": "^6.6.2",
+      "ffmpeg-static": "^5.2.0",
+      "ytdl-core": "^4.11.5"
+    }
+  }
+  
