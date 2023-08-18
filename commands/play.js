@@ -78,7 +78,8 @@ module.exports = {
 
 				interaction.client.channels.cache.get(musicChannelId).send({ embeds: [newNowPlaying] });
 				return await interaction.editReply(`Added ${searchResult.tracks[0].title} to queue`);
-			} else {
+			}
+			else {
 				return await interaction.editReply(`Now playing ${searchResult.tracks[0].title}`);
 			}
 		}

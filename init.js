@@ -19,12 +19,12 @@ module.exports = function(client) {
 			setPresence(track);
 
 			const newNowPlaying = new EmbedBuilder()
-					.setColor(color)
-					.setTitle('Now Playing')
-					.setDescription(`${track.title} (${track.duration})`)
-					.setThumbnail(track.thumbnail)
-					.setTimestamp()
-					.setFooter({ text: `Requested by: ${track.requestedBy.tag}`, iconURL: `${track.requestedBy.displayAvatarURL({ dynamic: true })}` });
+				.setColor(color)
+				.setTitle('Now Playing')
+				.setDescription(`${track.title} (${track.duration})`)
+				.setThumbnail(track.thumbnail)
+				.setTimestamp()
+				.setFooter({ text: `Requested by: ${track.requestedBy.tag}`, iconURL: `${track.requestedBy.displayAvatarURL({ dynamic: true })}` });
 
 			client.channels.cache.get(musicChannelId).send({ embeds: [newNowPlaying] });
 		});
