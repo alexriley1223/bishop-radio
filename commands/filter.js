@@ -2,6 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder } = require('discord.js');
 const { useQueue } = require('discord-player');
 const { color } = require('@config/bot.json');
+const { getParentDirectoryString } = require('@helpers/utils');
+const { commands } = require('../config.json');
 
 /*
 const avlFilters = [
@@ -34,7 +36,7 @@ const avlFilters = [
 */
 
 module.exports = {
-	enabled: true,
+	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder()
 		.setName('filter')
 		.setDescription('Play an audio filter over the current playback.')

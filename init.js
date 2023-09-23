@@ -1,6 +1,6 @@
 const { Player } = require('discord-player');
 const { ActivityType, EmbedBuilder } = require('discord.js');
-const { musicChannelId } = require('./config.json');
+const { musicChannelId, isModuleEnabled } = require('./config.json');
 const { color } = require('@config/bot.json');
 
 module.exports = function(client) {
@@ -8,8 +8,8 @@ module.exports = function(client) {
 
 	module.name = 'Bishop Radio';
 	module.description = 'A full-fledged web radio player for the Bishop Discord bot.';
-	module.version = '1.0.2';
-	module.enabled = true;
+	module.version = '1.1.0';
+	module.enabled = isModuleEnabled;
 
 	module.init = function init() {
 		const player = new Player(client);

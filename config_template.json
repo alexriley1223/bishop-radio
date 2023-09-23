@@ -1,3 +1,22 @@
+
 {
-    "musicChannelId": ""
+    "isModuleEnabled": true,
+    "musicChannelId": "",
+    "commands": {
+        "clear.js": true,
+        "filter.js": true,
+        "jump.js": true,
+        "moveTrack.js": true,
+        "pause.js": true,
+        "play.js": true,
+        "queue.js": true,
+        "remove.js": true,
+        "replay.js": true,
+        "resume.js": true,
+        "shuffle.js": true,
+        "skip.js": true,
+        "skipTo.js": true,
+        "stop.js": true,
+        "volume.js": true
+    }
 }

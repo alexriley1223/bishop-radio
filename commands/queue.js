@@ -2,9 +2,11 @@ const { EmbedBuilder } = require('discord.js');
 const { color } = require('@config/bot.json');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue } = require('discord-player');
+const { getParentDirectoryString } = require('@helpers/utils');
+const { commands } = require('../config.json');
 
 module.exports = {
-	enabled: true,
+	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder()
 		.setName('queue')
 		.setDescription('See the current queue.')

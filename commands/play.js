@@ -2,10 +2,11 @@ const { EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue, useMainPlayer } = require('discord-player');
 const { color } = require('@config/bot.json');
-const { musicChannelId } = require('../config.json');
+const { musicChannelId, commands } = require('../config.json');
+const { getParentDirectoryString } = require('@helpers/utils');
 
 module.exports = {
-	enabled: true,
+	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder()
 		.setName('play')
 		.setDescription('Play a youtube audio track given a title/name.')
