@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue } = require('discord-player');
 const { getParentDirectoryString } = require('@helpers/utils');
 const { commands } = require('../config.json');
+const { sendMusicEmbed } = require('../helpers/embed.js');
 
 module.exports = {
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
@@ -20,7 +21,7 @@ module.exports = {
 	async execute(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
-		if (queue?.size < 3) {
+		if (queue == null || queue?.size < 3) {
 			return interaction.reply({
 				content: 'The queue needs at least 3 tracks to use this command.',
 				ephemeral: true,
@@ -44,10 +45,12 @@ module.exports = {
 			});
 		}
 
+		const fromName = `${queue.tracks.at(from).title} by ${queue.tracks.at(from).author}`;
+
 		queue.node.move(from, to);
 
-		return interaction.reply({
-			content: `Track ${from + 1} moved to position ${to + 1} in the queue.`,
-		});
+		sendMusicEmbed(interaction, `↪  Moved ${fromName} to Position #${to + 1} In The Queue`, 'Moved By');
+
+		return await interaction.reply({ content: `Moved track successfully.`, ephemeral: true });
 	},
 };

@@ -15,6 +15,11 @@ module.exports = {
 		),
 	async execute(interaction) {
 		const queue = useQueue(interaction.guild.id);
+
+		if(queue == null) {
+			return await interaction.reply({ content: 'Bot is currently not playing any audio.', ephemeral: true });
+		}
+		
 		if (!queue?.size) {
 			return await interaction.reply({
 				content: 'There are no songs in the queue.',

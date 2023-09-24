@@ -4,6 +4,7 @@ const { useQueue } = require('discord-player');
 const { color } = require('@config/bot.json');
 const { getParentDirectoryString } = require('@helpers/utils');
 const { commands } = require('../config.json');
+const { sendMusicEmbed } = require('../helpers/embed.js');
 
 /*
 const avlFilters = [
@@ -87,6 +88,10 @@ module.exports = {
 		const queue = useQueue(interaction.guild.id);
 		const filters = queue.filters.ffmpeg.getFiltersEnabled();
 
+		if(queue == null) {
+			return await interaction.reply({ content: 'Bot is currently not playing any audio.', ephemeral: true });
+		}
+
 		switch (subCmd) {
 		case 'clear':
 			if (!filters.length) {
@@ -98,16 +103,19 @@ module.exports = {
 
 			queue.filters.ffmpeg.setFilters(false);
 
-			return await interaction.reply({ content: 'Cleared all Bot playback filters.' });
+			sendMusicEmbed(interaction, '🧹  Playback Filters Cleared', 'Cleared By');
+
+			return await interaction.reply({ content: 'Filters cleared successfully.', ephemeral: true });
 			break;
 
 		case 'toggle':
 			const filterName = interaction.options.getString('name', true);
+
 			queue.filters.ffmpeg.toggle(filterName);
 
-			return await interaction.reply({
-				content: `Audio filter ${filterName} has been applied to Bot playback.`,
-			});
+			sendMusicEmbed(interaction, `🤖  ${filterName[0].toUpperCase() + filterName.slice(1).toLowerCase()} Filter Applied to Playback`, 'Applied By');
+
+			return await interaction.reply({ content: `Audio filter has been applied successfully.`, ephemeral: true });
 			break;
 
 		default:

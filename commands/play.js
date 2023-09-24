@@ -66,19 +66,19 @@ module.exports = {
 				},
 			});
 
-			const newNowPlaying = new EmbedBuilder();
+			const addToQueue = new EmbedBuilder();
 
 			if (queue) {
-				newNowPlaying
+				addToQueue
 					.setColor(color)
-					.setTitle('Added to Queue')
+					.setTitle('📂  Added to Queue')
 					.setDescription(`${searchResult.tracks[0].title} (${searchResult.tracks[0].duration})`)
 					.setThumbnail(searchResult.tracks[0].thumbnail)
 					.setTimestamp()
 					.setFooter({ text: `Requested by: ${searchResult.tracks[0].requestedBy.tag}`, iconURL: `${searchResult.tracks[0].requestedBy.displayAvatarURL({ dynamic: true })}` });
 
-				interaction.client.channels.cache.get(musicChannelId).send({ embeds: [newNowPlaying] });
-				return await interaction.editReply(`Added ${searchResult.tracks[0].title} to queue`);
+				interaction.client.channels.cache.get(musicChannelId).send({ embeds: [addToQueue] });
+				return await interaction.editReply(`Succesfully added to queue.`);
 			}
 			else {
 				return await interaction.editReply(`Now playing ${searchResult.tracks[0].title}`);

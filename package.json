@@ -1,6 +1,6 @@
 {
     "name": "bishop-radio",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Radio submodule for the Bishop Discord bot",
     "author": "Alex Riley",
     "license": "GNU GENERAL PUBLIC LICENSE",

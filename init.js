@@ -2,13 +2,14 @@ const { Player } = require('discord-player');
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const { musicChannelId, isModuleEnabled } = require('./config.json');
 const { color } = require('@config/bot.json');
+const { version } = require('./package.json');
 
 module.exports = function(client) {
 	const module = {};
 
 	module.name = 'Bishop Radio';
 	module.description = 'A full-fledged web radio player for the Bishop Discord bot.';
-	module.version = '1.1.0';
+	module.version = version;
 	module.enabled = isModuleEnabled;
 
 	module.init = function init() {
@@ -20,7 +21,7 @@ module.exports = function(client) {
 
 			const newNowPlaying = new EmbedBuilder()
 				.setColor(color)
-				.setTitle('Now Playing')
+				.setTitle('🎵  Now Playing')
 				.setDescription(`${track.title} (${track.duration})`)
 				.setThumbnail(track.thumbnail)
 				.setTimestamp()

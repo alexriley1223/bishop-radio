@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue } = require('discord-player');
 const { getParentDirectoryString } = require('@helpers/utils');
 const { commands } = require('../config.json');
+const { sendMusicEmbed } = require('../helpers/embed.js');
 
 module.exports = {
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
@@ -19,6 +20,10 @@ module.exports = {
 		const queue = useQueue(interaction.guild.id);
 		const newVolume = interaction.options.getInteger('volume');
 
+		if(queue == null) {
+			return await interaction.reply({ content: 'Bot is currently not playing any audio.', ephemeral: true });
+		}
+
 		if (!newVolume) {
 			return await interaction.reply({
 				content: `Use /volume <1-200> to adjust the volume. Current volume is ${queue.node.volume}%!`,
@@ -28,8 +33,8 @@ module.exports = {
 
 		queue.node.setVolume(newVolume);
 
-		return await interaction.reply({
-			content: `Bot playback volume has been adjusted to ${newVolume}%!`,
-		});
+		sendMusicEmbed(interaction, `🔊  Playback Volume Changed to ${newVolume}%`, 'Changed By');
+
+		return await interaction.reply({ content: 'Volume changed successfully.', ephemeral: true });
 	},
 };

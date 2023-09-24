@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue } = require('discord-player');
 const { getParentDirectoryString } = require('@helpers/utils');
 const { commands } = require('../config.json');
+const { sendMusicEmbed } = require('../helpers/embed.js');
 
 module.exports = {
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
@@ -9,12 +10,14 @@ module.exports = {
 	async execute(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
-		if (queue.size < 2) {
+		if (queue == null || queue?.size < 1) {
 			return await interaction.reply({ content: 'The queue is already empty!', ephemeral: true });
 		}
 
 		queue.tracks.clear();
 
-		return await interaction.reply({ content: 'Bot playback queue has been cleared!' });
+		sendMusicEmbed(interaction, '🧹  Queue Has Been Cleared', 'Cleared By');
+
+		return await interaction.reply({ content: 'Queue cleared successfully.', ephemeral: true });
 	},
 };
