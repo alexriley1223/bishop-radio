@@ -22,7 +22,7 @@ module.exports = function(client) {
 			const newNowPlaying = new EmbedBuilder()
 				.setColor(color)
 				.setTitle('🎵  Now Playing')
-				.setDescription(`${track.title} (${track.duration})`)
+				.setDescription(`${track.title} by ${track.author} (${track.duration})`)
 				.setThumbnail(track.thumbnail)
 				.setTimestamp()
 				.setFooter({ text: `Requested by: ${track.requestedBy.tag}`, iconURL: `${track.requestedBy.displayAvatarURL({ dynamic: true })}` });
