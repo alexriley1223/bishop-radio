@@ -34,6 +34,6 @@ module.exports = {
 
 		sendMusicEmbed(interaction, `⏏  Removed ${removeName}`, 'Removed By');
 
-		return interaction.reply({ content: `Removed track successfully.`, ephemeral: true });
+		return interaction.reply({ content: 'Removed track successfully.', ephemeral: true });
 	},
 };

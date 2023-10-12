@@ -78,7 +78,7 @@ module.exports = {
 					.setFooter({ text: `Requested by: ${searchResult.tracks[0].requestedBy.tag}`, iconURL: `${searchResult.tracks[0].requestedBy.displayAvatarURL({ dynamic: true })}` });
 
 				interaction.client.channels.cache.get(musicChannelId).send({ embeds: [addToQueue] });
-				return await interaction.editReply(`Succesfully added to queue.`);
+				return await interaction.editReply('Succesfully added to queue.');
 			}
 			else {
 				return await interaction.editReply(`Now playing ${searchResult.tracks[0].title}`);

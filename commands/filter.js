@@ -88,7 +88,7 @@ module.exports = {
 		const queue = useQueue(interaction.guild.id);
 		const filters = queue.filters.ffmpeg.getFiltersEnabled();
 
-		if(queue == null) {
+		if (queue == null) {
 			return await interaction.reply({ content: 'Bot is currently not playing any audio.', ephemeral: true });
 		}
 
@@ -115,7 +115,7 @@ module.exports = {
 
 			sendMusicEmbed(interaction, `🤖  ${filterName[0].toUpperCase() + filterName.slice(1).toLowerCase()} Filter Applied to Playback`, 'Applied By');
 
-			return await interaction.reply({ content: `Audio filter has been applied successfully.`, ephemeral: true });
+			return await interaction.reply({ content: 'Audio filter has been applied successfully.', ephemeral: true });
 			break;
 
 		default:

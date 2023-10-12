@@ -51,6 +51,6 @@ module.exports = {
 
 		sendMusicEmbed(interaction, `↪  Moved ${fromName} to Position #${to + 1} In The Queue`, 'Moved By');
 
-		return await interaction.reply({ content: `Moved track successfully.`, ephemeral: true });
+		return await interaction.reply({ content: 'Moved track successfully.', ephemeral: true });
 	},
 };

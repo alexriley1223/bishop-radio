@@ -10,7 +10,7 @@ module.exports = {
 	async execute(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
-		if(queue == null) {
+		if (queue == null) {
 			return await interaction.reply({ content: 'Bot is currently not playing any audio.', ephemeral: true });
 		}
 
@@ -23,7 +23,7 @@ module.exports = {
 
 		queue.tracks.shuffle();
 
-		sendMusicEmbed(interaction, `🔀  Queue Shuffled`, 'Shuffled By');
+		sendMusicEmbed(interaction, '🔀  Queue Shuffled', 'Shuffled By');
 
 		return await interaction.reply({ content: 'Queue shuffled successfully.', ephemeral: true });
 	},

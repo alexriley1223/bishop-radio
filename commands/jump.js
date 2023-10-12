@@ -14,7 +14,7 @@ module.exports = {
 		),
 	async execute(interaction) {
 		const queue = useQueue(interaction.guild.id);
-		
+
 		if (queue == null || queue?.size < 1) {
 			return interaction.reply({ content: 'The queue has no more tracks.', ephemeral: true });
 		}
@@ -31,6 +31,6 @@ module.exports = {
 
 		sendMusicEmbed(interaction, `↪  Jumped to Queue Item #${index + 1} - ${jumpToName}`, 'Jumped By');
 
-		return await interaction.reply({ content: `Jump successful!`, ephemeral: true });
+		return await interaction.reply({ content: 'Jump successful!', ephemeral: true });
 	},
 };

@@ -12,10 +12,10 @@ module.exports = {
 	async execute(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
-		if(queue == null) {
+		if (queue == null) {
 			return await interaction.reply({ content: 'Bot is currently not playing any audio.', ephemeral: true });
 		}
-		
+
 		if (queue.size < 1 && queue.repeatMode !== 3) {
 			return interaction.reply({ content: 'The queue has no more tracks.', ephemeral: true });
 		}
@@ -23,7 +23,7 @@ module.exports = {
 		queue.node.skip();
 
 		sendMusicEmbed(interaction, '⏭  Current Track Skipped', 'Skipped By');
-		
+
 		return await interaction.reply({ content: 'Track skipped successfully.', ephemeral: true });
 	},
 };

@@ -20,7 +20,7 @@ module.exports = {
 		const queue = useQueue(interaction.guild.id);
 		const newVolume = interaction.options.getInteger('volume');
 
-		if(queue == null) {
+		if (queue == null) {
 			return await interaction.reply({ content: 'Bot is currently not playing any audio.', ephemeral: true });
 		}
 
