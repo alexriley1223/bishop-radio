@@ -10,7 +10,7 @@
 	</p>
 </div>
 
-## Bishop Rust Item Shop
+## Bishop Radio
 
 A module for the [Bishop Discord Bot](https://github.com/alexriley1223/bishop) that streams audio from multiple sources using the [Discord Player](https://discord-player.js.org/) library.
 
