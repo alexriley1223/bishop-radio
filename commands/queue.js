@@ -1,3 +1,4 @@
+const BishopCommand = require('@classes/BishopCommand');
 const { EmbedBuilder } = require('discord.js');
 const { color } = require('@config/bot.json');
 const { SlashCommandBuilder } = require('@discordjs/builders');
@@ -5,7 +6,7 @@ const { useQueue } = require('discord-player');
 const { getParentDirectoryString } = require('@helpers/utils');
 const { commands } = require('../config.json');
 
-module.exports = {
+module.exports = new BishopCommand({
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder()
 		.setName('queue')
@@ -13,7 +14,7 @@ module.exports = {
 		.addIntegerOption((option) =>
 			option.setName('page').setDescription('Page number of the queue'),
 		),
-	async execute(interaction) {
+	execute: async function(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
 		if (queue == null) {
@@ -61,4 +62,4 @@ module.exports = {
 
 		await interaction.reply({ ephemeral: true, embeds: [queueEmbed] });
 	},
-};
+});

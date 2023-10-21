@@ -1,3 +1,4 @@
+const BishopCommand = require('@classes/BishopCommand');
 const { EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue, useMainPlayer } = require('discord-player');
@@ -5,7 +6,7 @@ const { color } = require('@config/bot.json');
 const { musicChannelId, commands } = require('../config.json');
 const { getParentDirectoryString } = require('@helpers/utils');
 
-module.exports = {
+module.exports = new BishopCommand({
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder()
 		.setName('play')
@@ -13,7 +14,7 @@ module.exports = {
 		.addStringOption((option) =>
 			option.setName('name').setDescription('Name of song or video to be played').setRequired(true),
 		),
-	async execute(interaction) {
+	execute: async function(interaction) {
 		await interaction.deferReply({ ephemeral: true });
 
 		const query = interaction.options.getString('name', true);
@@ -89,4 +90,4 @@ module.exports = {
 			return await interaction.editReply('Something went wrong. Please try again.');
 		}
 	},
-};
+});

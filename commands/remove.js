@@ -1,10 +1,11 @@
+const BishopCommand = require('@classes/BishopCommand');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue } = require('discord-player');
 const { getParentDirectoryString } = require('@helpers/utils');
 const { commands } = require('../config.json');
 const { sendMusicEmbed } = require('../helpers/embed.js');
 
-module.exports = {
+module.exports = new BishopCommand({
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder()
 		.setName('remove')
@@ -15,7 +16,7 @@ module.exports = {
 				.setDescription('Track index to remove. Use /queue to check.')
 				.setRequired(true),
 		),
-	async execute(interaction) {
+	execute: async function(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
 		if (queue == null || queue?.size < 1) {
@@ -36,4 +37,4 @@ module.exports = {
 
 		return interaction.reply({ content: 'Removed track successfully.', ephemeral: true });
 	},
-};
+});

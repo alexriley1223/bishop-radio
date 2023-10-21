@@ -1,3 +1,4 @@
+const BishopCommand = require('@classes/BishopCommand');
 const { EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue } = require('discord-player');
@@ -5,11 +6,11 @@ const { getParentDirectoryString } = require('@helpers/utils');
 const { color } = require('@config/bot.json');
 const { commands } = require('../config.json');
 
-module.exports = {
+module.exports = new BishopCommand({
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder().setName('playback')
 		.setDescription('View information about the current playback.'),
-	async execute(interaction) {
+	execute: async function(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
 		if (queue == null) {
@@ -28,4 +29,4 @@ module.exports = {
 
 		return await interaction.reply({ embeds: [showPlaybackEmbed], ephemeral: true });
 	},
-};
+});

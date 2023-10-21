@@ -1,3 +1,4 @@
+const BishopCommand = require('@classes/BishopCommand');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder } = require('discord.js');
 const { useQueue } = require('discord-player');
@@ -36,7 +37,7 @@ const avlFilters = [
 ];
 */
 
-module.exports = {
+module.exports = new BishopCommand({
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder()
 		.setName('filter')
@@ -83,7 +84,7 @@ module.exports = {
 						),
 				),
 		),
-	async execute(interaction) {
+	execute: async function(interaction) {
 		const subCmd = await interaction.options.getSubcommand(true);
 		const queue = useQueue(interaction.guild.id);
 		const filters = queue.filters.ffmpeg.getFiltersEnabled();
@@ -106,7 +107,6 @@ module.exports = {
 			sendMusicEmbed(interaction, '🧹  Playback Filters Cleared', 'Cleared By');
 
 			return await interaction.reply({ content: 'Filters cleared successfully.', ephemeral: true });
-			break;
 
 		case 'toggle':
 			const filterName = interaction.options.getString('name', true);
@@ -116,7 +116,6 @@ module.exports = {
 			sendMusicEmbed(interaction, `🤖  ${filterName[0].toUpperCase() + filterName.slice(1).toLowerCase()} Filter Applied to Playback`, 'Applied By');
 
 			return await interaction.reply({ content: 'Audio filter has been applied successfully.', ephemeral: true });
-			break;
 
 		default:
 			const enabledFilters = queue.filters.ffmpeg.getFiltersEnabled();
@@ -133,4 +132,4 @@ module.exports = {
 			await interaction.reply({ ephemeral: true, embeds: [embed] });
 		}
 	},
-};
+});

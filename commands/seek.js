@@ -1,16 +1,17 @@
+const BishopCommand = require('@classes/BishopCommand');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue } = require('discord-player');
 const { getParentDirectoryString } = require('@helpers/utils');
 const { commands } = require('../config.json');
 
-module.exports = {
+module.exports = new BishopCommand({
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder().setName('seek')
 		.setDescription('Seek to a time (in seconds) in the current track.')
 		.addIntegerOption((option) =>
 			option.setName('time').setDescription('Time to seek to').setRequired(true),
 		),
-	async execute(interaction) {
+	execute: async function(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
 		if (queue == null) {
@@ -34,4 +35,4 @@ module.exports = {
 
 		return await interaction.reply({ content: 'Seeked in song successfully.', ephemeral: true });
 	},
-};
+});

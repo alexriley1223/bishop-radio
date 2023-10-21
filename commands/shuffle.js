@@ -1,13 +1,14 @@
+const BishopCommand = require('@classes/BishopCommand');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { useQueue } = require('discord-player');
 const { getParentDirectoryString } = require('@helpers/utils');
 const { commands } = require('../config.json');
 const { sendMusicEmbed } = require('../helpers/embed.js');
 
-module.exports = {
+module.exports = new BishopCommand({
 	enabled: commands[getParentDirectoryString(__filename, __dirname)],
 	data: new SlashCommandBuilder().setName('shuffle').setDescription('Shuffle the queue.'),
-	async execute(interaction) {
+	execute: async function(interaction) {
 		const queue = useQueue(interaction.guild.id);
 
 		if (queue == null) {
@@ -27,4 +28,4 @@ module.exports = {
 
 		return await interaction.reply({ content: 'Queue shuffled successfully.', ephemeral: true });
 	},
-};
+});
