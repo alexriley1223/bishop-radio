@@ -14,7 +14,11 @@ module.exports = (client) => {
 		author: 'Alex Riley',
 		directory: __dirname,
 		init: function(client) {
-			const player = new Player(client);
+			const player = new Player(client, {
+				ipconfig: {
+					blocks: ['fa25::/48', '2001:2::/48']
+				}
+			});
 			player.extractors.loadDefault();
 
 			/* TODO: Move these to events directory & logic */
