@@ -46,6 +46,16 @@ module.exports = (client) => {
 					resetPresence(client);
 				}, 2000);
 			});
+
+			player.events.on('playerError', (queue, err) => {
+				client.bishop.logger.error('RADI', `Failed to play track: ${err.message}`);
+				console.log(err);
+			});
+
+			player.events.on('error', (queue, err) => {
+				client.bishop.logger.error('RADI', `Generic radio error: ${err.message}`);
+				console.log(err);
+			});
 		},
 	});
 };
