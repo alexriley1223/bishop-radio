@@ -2,8 +2,10 @@ const { Player } = require('discord-player');
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const { musicChannelId, isModuleEnabled } = require('./config.json');
 const { color } = require('@config/bot.json');
+const { YoutubeTokens } = require('./token.json');
 const package = require('./package.json');
 const BishopModule = require('@classes/BishopModule');
+const { YoutubeiExtractor } = require('discord-player-youtubei');
 
 module.exports = (client) => {
 	return new BishopModule({
@@ -15,7 +17,11 @@ module.exports = (client) => {
 		directory: __dirname,
 		init: function(client) {
 			const player = new Player(client);
-			player.extractors.loadDefault();
+
+			player.extractors.loadDefault((ext) => ext !== 'YouTubeExtractor');
+			player.extractors.register(YoutubeiExtractor, {
+				authentication: YoutubeTokens
+			});
 
 			/* TODO: Move these to events directory & logic */
 			player.events.on('playerStart', (queue, track) => {

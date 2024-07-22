@@ -20,9 +20,11 @@ A module for the [Bishop Discord Bot](https://github.com/alexriley1223/bishop) t
 ### Installation
 1. Clone or download zip of repository and place in modules directory of the Bishop bot.
 2. Copy `config_template.json` to `config.json`. Fill out all fields.
-3. Run `npm install` on root Bishop bot to add required packages for this module.
-4. Restart bot.
-5. Configure command permissions in server as needed.
+3. Copy `token_template.json` to `token.json`. Follow next step.
+4. Follow the YoutubeiExtractor instructions and fill in all token fields.
+5. Run `npm install` on root Bishop bot to add required packages for this module.
+6. Restart bot.
+7. Configure command permissions in server as needed.
 
 ### Issues
 This repository is actively maintained by me. If you run into any issues, feel free to <a href="https://github.com/alexriley1223/bishop-radio/issues/new">create a new issue here</a>.
