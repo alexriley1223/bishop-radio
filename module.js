@@ -6,6 +6,7 @@ const { YoutubeTokens } = require('./token.json');
 const package = require('./package.json');
 const BishopModule = require('@classes/BishopModule');
 const { YoutubeiExtractor } = require('discord-player-youtubei');
+const { YoutubeExtractor } = require('@discord-player/extractor');
 
 module.exports = (client) => {
 	return new BishopModule({
@@ -16,7 +17,11 @@ module.exports = (client) => {
 		author: 'Alex Riley',
 		directory: __dirname,
 		init: function(client) {
-			const player = new Player(client);
+			const player = new Player(client, {
+				blockStreamFrom: [
+					YoutubeExtractor.identifier
+				]
+			});
 
 			player.extractors.loadDefault((ext) => ext !== 'YouTubeExtractor');
 			player.extractors.register(YoutubeiExtractor, {
