@@ -1,7 +1,3 @@
 {
-    "access_token": "",
-    "refresh_token": "",
-    "scope": "",
-    "token_type": "",
-    "expiry_date": ""
+    "tokenString": ""
 }

@@ -2,7 +2,7 @@ const { Player } = require('discord-player');
 const { ActivityType, EmbedBuilder } = require('discord.js');
 const { musicChannelId, isModuleEnabled } = require('./config.json');
 const { color } = require('@config/bot.json');
-const { YoutubeTokens } = require('./token.json');
+const { tokenString } = require('./token.json');
 const package = require('./package.json');
 const BishopModule = require('@classes/BishopModule');
 const { YoutubeiExtractor } = require('discord-player-youtubei');
@@ -25,7 +25,7 @@ module.exports = (client) => {
 
 			player.extractors.loadDefault((ext) => ext !== 'YouTubeExtractor');
 			player.extractors.register(YoutubeiExtractor, {
-				authentication: YoutubeTokens
+				authentication: tokenString
 			});
 
 			/* TODO: Move these to events directory & logic */
@@ -42,16 +42,19 @@ module.exports = (client) => {
 
 				client.channels.cache.get(musicChannelId).send({ embeds: [newNowPlaying] });
 			});
+			
 			player.events.on('emptyQueue', () => {
 				setTimeout(() => {
 					resetPresence(client);
 				}, 2000);
 			});
+
 			player.events.on('disconnect', () => {
 				setTimeout(() => {
 					resetPresence(client);
 				}, 2000);
 			});
+
 			player.events.on('connectionDestroyed', () => {
 				setTimeout(() => {
 					resetPresence(client);
